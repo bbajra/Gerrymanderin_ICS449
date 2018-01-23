@@ -49,7 +49,7 @@
 	<div class="jumbotron text-center" style="background-color:#ebf0fa;">
 	  <h1>Gerrymanderin Project</h1>
 	</div>
-	<div class="btn-group btn-group-lg btn-group-justified">
+	<div class="btn-group btn-group-lg">
 	<button type="button" class="btn btn-primary"><span class="glyphicons glyphicons-map"></span> Map </button>
 	<button type="button" class="btn btn-primary"><span class="glyphicons glyphicons-pie-chart"></span>Chart</button>
 	<button type="button" class="btn btn-info">Info</button>
