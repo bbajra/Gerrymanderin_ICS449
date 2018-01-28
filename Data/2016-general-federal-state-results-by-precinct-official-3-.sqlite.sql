@@ -1,4 +1,4 @@
-BEGIN TRANSACTION;
+start TRANSACTION;
 CREATE TABLE IF NOT EXISTS `spatial_ref_sys` (
 	`srid`	INTEGER UNIQUE,
 	`auth_name`	TEXT,
@@ -6,62 +6,64 @@ CREATE TABLE IF NOT EXISTS `spatial_ref_sys` (
 	`srtext`	TEXT
 );
 INSERT INTO `spatial_ref_sys` VALUES (4267,'EPSG','4267','GEOGCS["NAD27",DATUM["North_American_Datum_1927",SPHEROID["Clarke 1866",6378206.4,294.9786982138982,AUTHORITY["EPSG","7008"]],AUTHORITY["EPSG","6267"]],PRIMEM["Greenwich",0,AUTHORITY["EPSG","8901"]],UNIT["degree",0.0174532925199433,AUTHORITY["EPSG","9122"]],AUTHORITY["EPSG","4267"]]');
+-- up to this point works 1:35 1/28/2018
 CREATE TABLE IF NOT EXISTS `results` (
-	`ogc_fid`	INTEGER,
-	`vtdid`	VARCHAR,
-	`pctname`	VARCHAR,
-	`pctcode`	VARCHAR,
-	`mcdname`	VARCHAR,
-	`countyname`	VARCHAR,
-	`countycode`	INTEGER,
-	`congdist`	VARCHAR,
-	`mnsendist`	VARCHAR,
-	`mnlegdist`	VARCHAR,
-	`ctycomdist`	VARCHAR,
-	`juddist`	VARCHAR,
-	`swcdist`	VARCHAR,
-	`ward`	VARCHAR,
-	`hospdist`	VARCHAR,
-	`parkdist`	VARCHAR,
-	`tabsystem`	VARCHAR,
-	`tabmodel`	VARCHAR,
-	`mailballot`	VARCHAR,
-	`reg7am`	INTEGER,
-	`edr`	INTEGER,
-	`signatures`	INTEGER,
-	`ab_mb`	INTEGER,
-	`fedonlyab`	INTEGER,
-	`presonlyab`	INTEGER,
-	`totvoting`	INTEGER,
-	`usprsr`	INTEGER,
-	`usprsdfl`	INTEGER,
-	`usprscp`	INTEGER,
-	`usprslmn`	INTEGER,
-	`usprsswp`	INTEGER,
-	`usprsgp`	INTEGER,
-	`usprsadp`	INTEGER,
-	`usprsip`	INTEGER,
-	`usprslib`	INTEGER,
-	`usprswi`	INTEGER,
-	`usprstotal`	INTEGER,
-	`usrepr`	INTEGER,
-	`usrepdfl`	INTEGER,
-	`usrepwi`	INTEGER,
-	`usreptotal`	INTEGER,
-	`mnsenr`	INTEGER,
-	`mnsendfl`	INTEGER,
-	`mnsenwi`	INTEGER,
-	`mnsentotal`	INTEGER,
-	`mnlegr`	INTEGER,
-	`mnlegdfl`	INTEGER,
-	`mnlegwi`	INTEGER,
-	`mnlegtotal`	INTEGER,
-	`mnca1yes`	INTEGER,
-	`mnca1no`	INTEGER,
-	`mnca1est`	INTEGER,
-	`mnca1total`	INTEGER,
-	PRIMARY KEY(`ogc_fid`)
+    `ogc_fid` INTEGER,
+    `vtdid` VARCHAR(250),
+    `pctname` VARCHAR(250),
+    `pctcode` VARCHAR(250),
+    `mcdname` VARCHAR(250),
+    `countyname` VARCHAR(250),
+    `countycode` INTEGER,
+    `congdist` VARCHAR(250),
+    `mnsendist` VARCHAR(250),
+    `mnlegdist` VARCHAR(250),
+    `ctycomdist` VARCHAR(250),
+    `juddist` VARCHAR(250),
+    `swcdist` VARCHAR(250),
+    `ward` VARCHAR(250),
+    `hospdist` VARCHAR(250),
+    `parkdist` VARCHAR(250),
+    `tabsystem` VARCHAR(250),
+    `tabmodel` VARCHAR(250),
+    `mailballot` VARCHAR(250),
+    `reg7am` INTEGER,
+    `edr` INTEGER,
+    `signatures` INTEGER,
+    `ab_mb` INTEGER,
+    `fedonlyab` INTEGER,
+    `presonlyab` INTEGER,
+    `totvoting` INTEGER,
+    `usprsr` INTEGER,
+    `usprsdfl` INTEGER,
+    `usprscp` INTEGER,
+    `usprslmn` INTEGER,
+    `usprsswp` INTEGER,
+    `usprsgp` INTEGER,
+    `usprsadp` INTEGER,
+    `usprsip` INTEGER,
+    `usprslib` INTEGER,
+    `usprswi` INTEGER,
+    `usprstotal` INTEGER,
+    `usrepr` INTEGER,
+    `usrepdfl` INTEGER,
+    `usrepwi` INTEGER,
+    `usreptotal` INTEGER,
+    `mnsenr` INTEGER,
+    `mnsendfl` INTEGER,
+    `mnsenwi` INTEGER,
+    `mnsentotal` INTEGER,
+    `mnlegr` INTEGER,
+    `mnlegdfl` INTEGER,
+    `mnlegwi` INTEGER,
+    `mnlegtotal` INTEGER,
+    `mnca1yes` INTEGER,
+    `mnca1no` INTEGER,
+    `mnca1est` INTEGER,
+    `mnca1total` INTEGER,
+    PRIMARY KEY (`ogc_fid`)
 );
+-- This part works now 1:35
 INSERT INTO `results` VALUES (1,'270010005','Aitkin','0005','Aitkin','Aitkin',1,'8','10','10B','01','09','3001',NULL,NULL,NULL,'Precinct Tabulator','ES&S Model 100','NO',1141,110,758,242,0,0,1000,552,358,3,7,1,2,0,21,36,6,986,491,470,0,961,574,368,1,943,561,411,0,972,731,224,45,1000);
 INSERT INTO `results` VALUES (2,'270010010','Aitkin Twp','0010','Aitkin Twp','Aitkin',1,'8','10','10B','01','09','3001',NULL,NULL,NULL,'Precinct Tabulator','ES&S Model 100','NO',588,44,437,113,0,0,550,356,154,1,2,0,5,0,7,18,4,547,332,206,0,538,381,150,0,531,370,173,0,543,438,95,17,550);
 INSERT INTO `results` VALUES (3,'270010015','Ball Bluff Twp','0015','Ball Bluff Twp','Aitkin',1,'8','10','10B','05','09','3001',NULL,NULL,NULL,'Precinct Tabulator','ES&S Model 100','NO',179,18,145,19,0,0,164,96,57,0,1,0,1,0,2,6,1,164,80,82,0,162,83,77,0,160,79,79,0,158,131,32,1,164);
@@ -4183,26 +4185,22 @@ INSERT INTO `results` VALUES (4118,'271730155','Wergeland Twp','0155','Wergeland
 INSERT INTO `results` VALUES (4119,'271730160','Wood Lake','0160','Wood Lake','Yellow Medicine',87,'7','16','16A','01','08','5173',NULL,NULL,NULL,'Precinct Tabulator','ES&S Model 100','NO',231,25,203,8,0,0,211,138,51,2,1,0,2,0,6,9,0,209,95,111,0,206,136,70,1,207,154,54,0,208,170,39,2,211);
 INSERT INTO `results` VALUES (4120,'271730165','Wood Lake Twp','0165','Wood Lake Twp','Yellow Medicine',87,'7','16','16A','01','08','5173',NULL,NULL,NULL,'Precinct Tabulator','ES&S Model 100','YES',143,6,7,123,0,0,130,96,23,2,1,0,1,0,6,1,0,130,61,68,0,129,80,47,0,127,94,36,0,130,108,20,2,130);
 INSERT INTO `results` VALUES (4121,NULL,NULL,NULL,NULL,'TOTAL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,3270734,353179,2289936,674566,3682,88,2968281,1322951,1367716,9456,11291,1672,36985,1431,53076,112972,27263,2944813,1334686,1434590,4376,2860432,1377129,1409769,5964,2812819,1400587,1366375,6734,2782505,2265835,536272,166174,2968281);
+-- works up to here 1/28/2018
+
 CREATE TABLE IF NOT EXISTS `notes` (
 	`ogc_fid`	INTEGER,
-	`this file contains election results certified by the state canvassing board on nov. 29, 2016, and dec. 19, 2016 for the senate district 14 recount.`	VARCHAR,
+	`Note`	VARCHAR(250),
 	PRIMARY KEY(`ogc_fid`)
 );
-INSERT INTO `notes` VALUES (1,NULL);
-INSERT INTO `notes` VALUES (2,'Voter statistics are those certified by County Canvassing Boards.');
-INSERT INTO `notes` VALUES (3,NULL);
-INSERT INTO `notes` VALUES (4,'Modified in April 2017 to add missing equipment information.');
-CREATE TABLE IF NOT EXISTS `geometry_columns` (
-	`f_table_name`	VARCHAR,
-	`f_geometry_column`	VARCHAR,
-	`geometry_type`	INTEGER,
-	`coord_dimension`	INTEGER,
-	`srid`	INTEGER,
-	`geometry_format`	VARCHAR
-);
+INSERT INTO `notes` VALUES (1,'this file contains election results certified by the state canvassing board on nov. 29, 2016, and dec. 19, 2016 for the senate district 14 recount.');
+INSERT INTO `notes` VALUES (2,NULL);
+INSERT INTO `notes` VALUES (3,'Voter statistics are those certified by County Canvassing Boards.');
+INSERT INTO `notes` VALUES (4,NULL);
+INSERT INTO `notes` VALUES (5,'Modified in April 2017 to add missing equipment information.');
+-- working now 1:51
 CREATE TABLE IF NOT EXISTS `fields` (
-	`FieldName`	varchar,
-	`Definition`	varchar
+	`FieldName`	VARCHAR(250),
+	`Definition`	VARCHAR(250)
 );
 INSERT INTO `fields` VALUES ('FIELDNAME','DEFINITION');
 INSERT INTO `fields` VALUES ('VTDID','Vote Tabulation District ID ');
@@ -4257,28 +4255,8 @@ INSERT INTO `fields` VALUES ('MNCA1YES','Constitutional Amendment 1 Yes votes');
 INSERT INTO `fields` VALUES ('MNCA1NO','Constitutional Amendment 1 No votes');
 INSERT INTO `fields` VALUES ('MNCA1EST','Constitutional Amendment 1 Estimated Blanks');
 INSERT INTO `fields` VALUES ('MNCA1TOTAL','Constitutional Amendment 1 Total votes (=TOTVOTING)');
-INSERT INTO `fields` VALUES (NULL,NULL);
-INSERT INTO `fields` VALUES (NULL,NULL);
-INSERT INTO `fields` VALUES (NULL,NULL);
-INSERT INTO `fields` VALUES (NULL,NULL);
-INSERT INTO `fields` VALUES (NULL,NULL);
-INSERT INTO `fields` VALUES (NULL,NULL);
-INSERT INTO `fields` VALUES (NULL,NULL);
-INSERT INTO `fields` VALUES (NULL,NULL);
-INSERT INTO `fields` VALUES (NULL,NULL);
-INSERT INTO `fields` VALUES (NULL,NULL);
-INSERT INTO `fields` VALUES (NULL,NULL);
-INSERT INTO `fields` VALUES (NULL,NULL);
-INSERT INTO `fields` VALUES (NULL,NULL);
-INSERT INTO `fields` VALUES (NULL,NULL);
-INSERT INTO `fields` VALUES (NULL,NULL);
-INSERT INTO `fields` VALUES (NULL,NULL);
-INSERT INTO `fields` VALUES (NULL,NULL);
-INSERT INTO `fields` VALUES (NULL,NULL);
-INSERT INTO `fields` VALUES (NULL,NULL);
-INSERT INTO `fields` VALUES (NULL,NULL);
 CREATE TABLE IF NOT EXISTS `distrcits` (
-	`districtName`	varchar
+	`districtName`	VARCHAR(250)
 );
 INSERT INTO `distrcits` VALUES ('Soil and Water Conservation Districts');
 INSERT INTO `distrcits` VALUES ('In most counties one SWCD covers the whole county. Otter Tail, Polk and St. Louis counties have two SWCD each:');
@@ -4325,10 +4303,8 @@ INSERT INTO `distrcits` VALUES ('4165 - Washington District 3');
 INSERT INTO `distrcits` VALUES ('4166 - Washington District 4');
 INSERT INTO `distrcits` VALUES ('4167 - Washington District 5');
 INSERT INTO `distrcits` VALUES ('Hennepin County no longer has SWCD.');
-INSERT INTO `distrcits` VALUES (NULL);
 INSERT INTO `distrcits` VALUES ('Park Districts');
 INSERT INTO `distrcits` VALUES ('There are only two: Minneapolis and Three Rivers (Hennepin County outside of Minneapolis)');
-INSERT INTO `distrcits` VALUES (NULL);
 INSERT INTO `distrcits` VALUES ('Hospital Districts');
 INSERT INTO `distrcits` VALUES ('310 - Canby Community');
 INSERT INTO `distrcits` VALUES ('320 - Cannon Falls');
@@ -4350,10 +4326,10 @@ INSERT INTO `distrcits` VALUES ('1640 - Perham');
 INSERT INTO `distrcits` VALUES ('2110 - United');
 CREATE TABLE IF NOT EXISTS `counties` (
 	`orgc_fid`	int,
-	`CountyID`	VARCHAR,
-	`Field2`	varchar,
-	`CountyName`	varchar,
-	`fips`	varchar
+	`CountyID`	VARCHAR(250),
+	`Field2`	VARCHAR(250),
+	`CountyName`	VARCHAR(250),
+	`fips`	VARCHAR(250)
 );
 INSERT INTO `counties` VALUES (1,'CountyID',NULL,'County Name','FIPS');
 INSERT INTO `counties` VALUES (2,'1',NULL,'AITKIN','27001');
@@ -4443,4 +4419,4 @@ INSERT INTO `counties` VALUES (85,'84',NULL,'WILKIN','27167');
 INSERT INTO `counties` VALUES (86,'85',NULL,'WINONA','27169');
 INSERT INTO `counties` VALUES (87,'86',NULL,'WRIGHT','27171');
 INSERT INTO `counties` VALUES (88,'87',NULL,'YELLOW MEDICINE','27173');
-COMMIT;
+commit
