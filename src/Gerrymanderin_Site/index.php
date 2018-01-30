@@ -5,7 +5,6 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<link rel="stylesheet" href="lib/leaflet/leaflet.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script src="lib/leaflet/leaflet.js"></script>
 	<script src="data/countries.geojson"></script>
@@ -14,18 +13,23 @@
 	</style>
 		
 	<?php
-		$servername = "localhost";
-		$username = "root";
-		$password = "9808882071";
+	/*    Using "mysqli" instead of "mysql" that is obsolete.
+	* Change the value of parameter 3 if you have set a password on the root userid
+	* Add port number 3307 in parameter number 5 to use MariaDB instead of MySQL
+	*
+	*     Utilisation de "mysqli" à la place de "mysql" qui est obsolète.
+	* Changer la valeur du 3e paramètre si vous avez mis un mot de passe à root
+	* Ajouter le port 3307 en paramètre 5 si vous voulez utiliser MariaDB
+	*/
+	$mysqli = new mysqli('127.0.0.1', 'root', '');
 
-	// Create connection
-	$conn = new mysqli($servername, $username, $password);
-
-	// Check connection
-	if ($conn->connect_error) {
-		die("Connection failed: " . $conn->connect_error);
-	} 
-	echo "Database Connected successfully";
+	if ($mysqli->connect_error) {
+		die('Connect Error (' . $mysqli->connect_errno . ') '
+				. $mysqli->connect_error);
+	}
+	echo '<p>Connection OK '. $mysqli->host_info.'</p>';
+	echo '<p>Server '.$mysqli->server_info.'</p>';
+	$mysqli->close();
 	?>
 	</head>
 	<title>
@@ -63,9 +67,16 @@
 	<h1>World Map</h1>
 		<div id="map"></div>
 		<script>
-			var map = L.map('map').setView([43.8476, 18.3564], 13);
+			var map = L.map('map').setView([44.9375, -93.2010],13);
+			/*var stateLayer = L.geoJson(precincts).addTo(map);
+			$.getJSON('mn-precincts.json', function (data) {
+			// Define the geojson layer and add it to the map
+			L.geoJson(data).addTo(map);
+			});*/
 			var countriesLayer = L.geoJson(countries).addTo(map);
+			map.fitBounds(stateLayer.getBounds());
 			map.fitBounds(countriesLayer.getBounds());
+			
 		</script>
 	</div>
 	
