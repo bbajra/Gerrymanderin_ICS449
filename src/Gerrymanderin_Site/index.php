@@ -29,6 +29,18 @@
 		die('Connect Error (' . $mysqli->connect_errno . ') '
 				. $mysqli->connect_error);
 	}
+	$sql ="select pctname ,USPRSR, USPRsDFL, usprstotal from ics499.results";
+	$result = $mysqli->query($sql);
+	
+	if ($result->num_rows > 0) {
+    // output data of each row
+    while($row = $result->fetch_assoc()) {
+         echo "<br> Precint name: ". $row["pctname"]. " - Preidential Republican Votes: ". $row["USPRSR"]. " Presidental Democrat Votes: " . $row["USPRsDFL"] . " Total Number of Voters: ". $row["usprstotal"]. "<br>";
+    }
+} else {
+    echo "0 results";
+}
+	
 	echo '<p>Connection OK '. $mysqli->host_info.'</p>';
 	echo '<p>Server '.$mysqli->server_info.'</p>';
 	$mysqli->close();
