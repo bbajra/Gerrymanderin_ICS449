@@ -81,49 +81,47 @@
 	<h1>World Map</h1>
 		<div id="map"></div>
 		<script>
+			//Initializing the map
 			var mapboxAccessToken = 'pk.eyJ1IjoiYmJhanJhIiwiYSI6ImNqY3Q2eDYycTBmZ3kyeHZ0ajZsNGtvajIifQ.tKzBEEfc7mCC0HmVy-KYuw';
 			var map = L.map('map').setView([44.9375, -93.2010],7);
+		
+		//Loading the title layer
 			L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=' + mapboxAccessToken, {
 				id: 'mapbox.light',
 				attribution: 'State map data',
 			}).addTo(map);
-			/*var stateLayer = L.geoJson(precincts).addTo(map);
-			$.getJSON('mn-precincts.json', function (data) {
-			// Define the geojson layer and add it to the map
-			L.geoJson(data).addTo(map);
-			});*/
+			
+		//Loading geoJson from an external file
 			var precinctLayer = L.geoJson(mn).addTo(map);
-			//var countriesLayer = L.geoJson(countries).addTo(map);
 			map.fitBounds(precinctLayer.getBounds());
-			//map.fitBounds(countriesLayer.getBounds());
-			//countriesLayer.addTo(map);
-						
-			// get color depending on population density value
-			function getColor(d) {
-				return d > 70 ? '#800026' :
-						d > 60  ? '#BD0026' :
-						d > 50  ? '#E31A1C' :
-						d > 40  ? '#FC4E2A' :
-						d > 30   ? '#FD8D3C' :
-						d > 20   ? '#FEB24C' :
-						d > 10   ? '#FED976' :
-									'#FFEDA0';
-			}
+			
+		/*
+		*Function to color the layer by CountyID
+		* Comment out the function to get the open street map
+		* The function is currently not working
+		*/
+		/* >>>>DELETE THIS LINE TO USE THE FUNCTION
+		
+		$.getJSON("mnprecinct.geojson",function(mnData){
+				L.geoJson(mnData,{
+					style: function(feature){
+						var fillColor,
+						density = feature.properties.density;
+						CountyID = feature.properties.CountyID;
+						if(CountyID === 1) fillColor = "#006837";
+						else if ( CountyID === 2 ) fillColor = "#31a354";
+						else if ( CountyID == 3 ) fillColor = "#78c679";
+						else if ( CountyID == 4 ) fillColor = "#c2e699";
+						else if ( CountyID > 4 ) fillColor = "#ffffcc";
+						return { color: "#999", weight: 1, fillColor: fillColor, fillOpacity: .6 };
 
-			function style(feature) {
-				return {
-					weight: 2,
-					opacity: 1,
-					color: 'white',
-					dashArray: '3',
-					fillOpacity: 0.7,
-					fillColor: getColor(Feature.properties.CountyID)
-				};
-			}
-
-			var geojson = L.geoJson(mn, {
-				style: style,
-			}).addTo(map);
+					},
+					onEachFeature: function(feature, layer){
+						layer.bindPopup( "<strong>" + feature.properties.Precinct + "</strong><br/>" + feature.properties.County + " rats per square mile" )
+					}
+				}).addTo(map);
+			});
+			
 
 		
 		</script>
