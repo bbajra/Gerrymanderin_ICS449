@@ -13,7 +13,7 @@
 	<!script src="lib/leaflet/leaflet.js"></script>
 	
 	<script src="data/countries.geojson"></script>
-	<script src="data/mnprecinct.geojson"></script>
+	<script src="data/mnprecinctparty.geojson"></script>
 	<style type="text/css">
 			#map { height : 720px; width : 1200px;}
 			.info { padding: 6px 8px; font: 14px/16px Arial, Helvetica, sans-serif; background: white; background: rgba(255,255,255,0.8); box-shadow: 0 0 15px rgba(0,0,0,0.2); border-radius: 5px; } .info h4 { margin: 0 0 5px; color: #777; }
@@ -94,7 +94,7 @@
 		<script>
 		//Initializing the map
 			var mapboxAccessToken = 'pk.eyJ1IjoiYmJhanJhIiwiYSI6ImNqY3Q2eDYycTBmZ3kyeHZ0ajZsNGtvajIifQ.tKzBEEfc7mCC0HmVy-KYuw';
-			var map = L.map('map').setView([44.9375, -93.2010],7);
+			var map = L.map('map').setView([44.9375, -93.2010],2);
 		
 		//Loading the title layer
 			/*L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=' + mapboxAccessToken, {
@@ -102,7 +102,7 @@
 				attribution: 'State map data',
 			}).addTo(map);*/
 			L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
-				maxZoom: 18,
+				maxZoom: 90,
 				attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
 					'<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
 					'Imagery © <a href="http://mapbox.com">Mapbox</a>',
@@ -113,37 +113,37 @@
 			var precinctLayer = L.geoJson(mn).addTo(map);
 			map.fitBounds(precinctLayer.getBounds());
 		
-		// control that shows state info on hover
-		var info = L.control();
+		// control that shows map information from GeoJson file when hovering
+		var mapLayerInformation = L.control();
 
-		info.onAdd = function (map) {
+		mapLayerInformation.onAdd = function (map) {
 			this._div = L.DomUtil.create('div', 'info');
 			this.update();
 			return this._div;
 		};
 
-		info.update = function (props) {
+		mapLayerInformation.update = function (props) {
 			this._div.innerHTML = '<h4>Election Results Precinct</h4>' +  (props ?
-				'<b>' + props.properties.Precinct + '</b><br />' + props.properties.County 
+				'<b>' + 'District:' + props.CongDist + '</b><br />' + 'County: ' + props.County + '</b><br/>' + 'Winning Party: ' + props.party
 				: 'Hover over an area');
 		};
 
-		info.addTo(map);
+		mapLayerInformation.addTo(map);
 
 		/*
 		*Function to differentiate the districts by color
 		*Add boundaries to the layer
 		*/
 
-		function getColor(d){
-				return d==8 ? '#800026' :
-						d==7 ? '#BD0026' :
-						d==6 ? '#FC4E2A' :
-						d==5 ? '#E31A1C' :
-						d==4 ? '#FD8D3C' :
-						d==3 ? '#2b8cbe' :
-						d==2 ? '#2ca25f' :
-						d==1 ? '#FFEDA0' :
+		function getColor(district){
+				return district==8 ? '#800026' :
+						district==7 ? '#BD0026' :
+						district==6 ? '#FC4E2A' :
+						district==5 ? '#E31A1C' :
+						district==4 ? '#FD8D3C' :
+						district==3 ? '#2b8cbe' :
+						district==2 ? '#2ca25f' :
+						district==1 ? '#FFEDA0' :
 							   '#ff0000' ;
 		}
 
@@ -153,13 +153,53 @@
 				weight: 1,
 				opacity: 1,
 				color: 'black',
-				dashArray: '2',
+				dashArray: '0.5',
 				fillOpacity: 0.7				
 			};
 		}
 
+		/*
+		* Adding interaction to map with hovering and zooming feature
+		*/
+		function highlightFeature(e) {
+			var mapLayer = e.target;
+
+			mapLayer.setStyle({
+				weight: 5,
+				color: '#330066',
+				opacity: 0.9,
+				dashArray: '',
+				fillOpacity: 0.7
+			});
+
+			if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+				mapLayer.bringToFront();
+			}
+
+			mapLayerInformation.update(mapLayer.feature.properties);
+		}
+			
+		var colorLayer;
+
+		function resetHighlight(e) {
+			colorLayer.resetStyle(e.target);
+			mapLayerInformation.update();
+		}
+
+		function zoomToFeature(e) {
+			map.fitBounds(e.target.getBounds());
+		}
+
+		function onEachFeature(feature, mapLayer) {
+			mapLayer.on({
+				mouseover: highlightFeature,
+				mouseout: resetHighlight,
+				click: zoomToFeature
+			});
+		}
 		var colorLayer = L.geoJson(mn, {
-			style: style
+			style: style,
+			onEachFeature: onEachFeature
 			}).addTo(map);
 		
 		</script>
