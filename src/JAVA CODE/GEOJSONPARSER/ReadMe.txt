@@ -1,0 +1,1 @@
+This Class write to the geojson file Republican or democrat
