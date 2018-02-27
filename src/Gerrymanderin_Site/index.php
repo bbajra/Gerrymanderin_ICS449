@@ -210,6 +210,21 @@
 			onEachFeature: onEachFeature
 			}).addTo(map);
 		
+		function secondLayerFeature(feature, mapLayer) {
+			mapLayer.on({
+				mouseover: mouseoverSecondLayer
+			});
+		}
+		function mouseoverSecondLayer(e) {
+			var mapSecondLayer = e.target;
+
+			if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+				mapSecondLayer.bringToFront();
+			}
+
+			mapLayerInformation.update(mapSecondLayer.feature.properties);
+		}
+
 		var partyLayer = L.geoJson(minnesota, {
 			style: function(feature) {
 					switch (feature.properties.party) {
@@ -221,9 +236,10 @@
 			opacity: 1,
 			color: '',
 			dashArray: '0.5',
-			fillOpacity: 0.7
+			fillOpacity: 0.7,
+			onEachFeature: secondLayerFeature
 			}).addTo(map);
-		
+
 		var basemaps = {
 			"Congressional": colorLayer,
 			"Party": partyLayer
