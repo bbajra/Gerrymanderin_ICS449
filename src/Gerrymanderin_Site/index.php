@@ -146,6 +146,14 @@
 						district==1 ? '#FFEDA0' :
 							   '#ff0000' ;
 		}
+							L.geoJSON(mn, {
+				style: function(feature) {
+					switch (feature.properties.party) {
+						case 'Republican': return {color: "#ff0000"};
+						case 'Democrat':   return {color: "#0000ff"};
+        }
+    }
+}).addTo(map);
 
 		function style(feature) {
 			return {
