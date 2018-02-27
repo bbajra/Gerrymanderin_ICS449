@@ -14,6 +14,7 @@
 	
 	<script src="data/countries.geojson"></script>
 	<script src="data/mnprecinctparty.geojson"></script>
+	<script src="data/mnprecinctparty2.geojson"></script>
 	<style type="text/css">
 			#map { height : 720px; width : 1200px;}
 			.info { padding: 6px 8px; font: 14px/16px Arial, Helvetica, sans-serif; background: white; background: rgba(255,255,255,0.8); box-shadow: 0 0 15px rgba(0,0,0,0.2); border-radius: 5px; } .info h4 { margin: 0 0 5px; color: #777; }
@@ -112,6 +113,8 @@
 		//Loading geoJson from an external file
 			var precinctLayer = L.geoJson(mn).addTo(map);
 			map.fitBounds(precinctLayer.getBounds());
+			var partyelectionLayer = L.geoJson(minnesota).addTo(map);
+			map.fitBounds(partyelectionLayer.getBounds());
 		
 		// control that shows map information from GeoJson file when hovering
 		var mapLayerInformation = L.control();
@@ -146,15 +149,7 @@
 						district==1 ? '#FFEDA0' :
 							   '#ff0000' ;
 		}
-							L.geoJSON(mn, {
-				style: function(feature) {
-					switch (feature.properties.party) {
-						case 'Republican': return {color: "#ff0000"};
-						case 'Democrat':   return {color: "#0000ff"};
-        }
-    }
-}).addTo(map);
-
+							
 		function style(feature) {
 			return {
 				fillColor: getColor(feature.properties.CongDist),
@@ -205,11 +200,37 @@
 				click: zoomToFeature
 			});
 		}
+		
+		/*
+		* Adding two layers to the map
+		*/
+
 		var colorLayer = L.geoJson(mn, {
 			style: style,
 			onEachFeature: onEachFeature
 			}).addTo(map);
 		
+		var partyLayer = L.geoJson(minnesota, {
+			style: function(feature) {
+					switch (feature.properties.party) {
+						case 'Republican': return {color: "#ff0000"};
+						case 'Democrat':   return {color: "#0000ff"};
+					}
+			},
+			weight: 1,
+			opacity: 1,
+			color: '',
+			dashArray: '0.5',
+			fillOpacity: 0.7
+			}).addTo(map);
+		
+		var basemaps = {
+			"Congressional": colorLayer,
+			"Party": partyLayer
+		};
+
+
+		L.control.layers(basemaps, {}, {collapsed: false}).addTo(map);
 		</script>
 	</div>
 	
