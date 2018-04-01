@@ -25,12 +25,19 @@
 	</title>
 	<body>
 		<nav class="navbar navbar-inverse">
-			<div class="container-fluid">
+				<div class="navbar-header">
+						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+						  <span class="icon-bar"></span>
+						  <span class="icon-bar"></span>
+						  <span class="icon-bar"></span>                        
+						</button>
+						<a class="navbar-brand" href="index.php">MN 2016 Election Results</a>
+				</div>
+			<div class="collapse navbar-collapse" id="myNavbar">
 				<ul class="nav navbar-nav">
-				<li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
 				<li class="nav-item"><a class="nav-link" href="usCongress.html" class="btn btn-default"> U.S. Congress </a></li>
 				<li class="nav-item"><a class="nav-link" href="presidential.html" class="btn btn-default">Presidential</a></li>
-				<li class="active"><a class="nav-link" href="mnSenate.html" class="btn btn-default">MN Senate</a></li>
+				<li class="active"><a class="nav-link" href="#" class="btn btn-default">MN Senate</a></li>
 				<li class="nav-item"><a class="nav-link" href="mnHouse.html" class="btn btn-default"> MN House </a></li>
 				<li class="nav-item"><a class="nav-link" href="#">Recommendation</a></li>
 				</ul>
@@ -109,6 +116,23 @@
 				fillOpacity: 0.7				
 			};
 		}
+
+		function getColor2(district){
+				return district == "Republican"  ? '#800000' :
+						district == "Democrat" ? '#000080' :
+												'#FFFF00' ;
+		}
+							
+		function style2(feature) {
+			return {
+				fillColor: getColor2(feature.properties.party),
+				weight: 1,
+				opacity: 1,
+				color: 'black',
+				dashArray: '0.5',
+				fillOpacity: 0.8				
+			};
+		}
 		/*
 		* Adding interaction to map with hovering and zooming feature
 		*/
@@ -171,73 +195,14 @@
 
 			mapLayerInformation.update(mapSecondLayer.feature.properties);
 		}
-
 		
 		var partyLayer = L.geoJson(mn, {
-			style: function(feature) {
-				var blue = ['#f7fbff','#deebf7','#c6dbef','#9ecae1','#6baed6','#4292c6','#2171b5','#08519c','#08306b'];
-				var red = ['#fff5f0','#fee0d2','#fcbba1','#fc9272','#fb6a4a','#ef3b2c','#cb181d','#a50f15','#67000d'];
-					if (feature.properties.party == "Republican"){
-					//republicanColor(feature.properties.CongDist);
-					switch (feature.properties.MNSenDist){
-						case '0' : return {color: red[8]};
-						case '3' : return {color: red[7]};
-						case '2' : return {color: red[6]};
-						case '6' : return {color: red[5]};
-						case '5' : return {color: red[4]};
-						case '4' : return {color: red[3]};
-						case '7' : return {color: red[2]};
-						case '8' : return {color: red[1]};
-						case '1' : return {color: red[0]};
-					}
-				}
-				if (feature.properties.party == "Democrat"){
-					//democratColor(feature.properties.CongDist);
-					switch (feature.properties.MNSenDist){
-						case '0' : return {color: blue[8]};
-						case '8' : return {color: blue[7]};
-						case '7' : return {color: blue[6]};
-						case '6' : return {color: blue[5]};
-						case '5' : return {color: blue[4]};
-						case '4' : return {color: blue[3]};
-						case '3' : return {color: blue[2]};
-						case '2' : return {color: blue[1]};
-						case '1' : return {color: blue[0]};
-					}
-				}
-				/*if (feature.properties.party == "Republican"){
-						switch (feature.properties.MNSenDist){
-							case '1','11','21','31','41','51','61' : return {color: red[8]}
-							case '2','12','22','32','42','52','62' : return {color: red[7]}
-							case '3','13','23','33','43','53','63' : return {color: red[6]}
-							case '4','14','24','34','44','54','64' : return {color: red[5]}
-							case '5','15','25','35','45','55','65' : return {color: red[4]}
-							case '6','16','26','36','46','56','66' : return {color: red[3]}
-							case '7','17','27','37','47','57','67' : return {color: red[2]}
-						}
-					}
-					if (feature.properties.party == "Democrat"){
-						switch (feature.properties.MNSenDist){
-							case '1','11','21','31','41','51','61' : return {color: blue[8]}
-							case '2','12','22','32','42','52','62' : return {color: blue[7]}
-							case '3','13','23','33','43','53','63' : return {color: blue[6]}
-							case '4','14','24','34','44','54','64' : return {color: blue[5]}
-							case '5','15','25','35','45','55','65' : return {color: blue[4]}
-							case '6','16','26','36','46','56','66' : return {color: blue[3]}
-							case '7','17','27','37','47','57','67' : return {color: blue[2]}
-						}
-					}*/
-			},
-			weight: 1,
-			opacity: 0.8,
-			color: '',
-			dashArray: '0.3',
-			fillOpacity: 0.8,
+			style: style2,
 			onEachFeature: secondLayerFeature
 			}).addTo(map);
 
 		var basemaps = {
-			"District map": colorLayer,
+			//"District map": colorLayer,
 			"Election map": partyLayer
 		};
 

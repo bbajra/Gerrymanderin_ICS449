@@ -24,9 +24,16 @@
 	</title>
 	<body style="background-color:#ffffff;">
 	<nav class="navbar navbar-inverse">
-	  <div class="container-fluid">
+	<div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="#">MN 2016 Election Results</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
 		<ul class="nav navbar-nav">
-		  <li class="active"><a href="#">Home</a></li>
 		  <li><a href="#">Recommendation</a></li>
 		</ul>
 		<form action="http://www.google.com/search" class="navbar-form navbar-left" method="get" name="searchform" target="_blank">
