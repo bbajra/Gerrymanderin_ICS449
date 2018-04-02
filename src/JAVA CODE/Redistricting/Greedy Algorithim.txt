@@ -1,0 +1,2 @@
+After one grouping is finished do we following the adjacencent and keep grouping?
+	Answer: I think thats fair

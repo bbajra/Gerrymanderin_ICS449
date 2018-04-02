@@ -1,0 +1,86 @@
+This is a newer version of draw boundaries & GEOJSEON Parse except this time the goal is not to draw boundaries
+but instead to redraw the districing lines
+This program will read the GeoJson File and write to it
+
+
+Step1 . find total population of MN
+step2. Find population of each precint and find the ratio of precint population to Total population
+This could be its own piece ^^^^^^^
+
+step3. Find the total perimeter of MN
+Step4. calculate total area of MN 
+	Area = Perimeter^2/(4pi)
+	Sort the list into latitudes in that have the highest longitude this should give us the perimeter
+This could be its own piece^^^^^^
+
+
+Step5. calculate the area of all precints and get the ratio saved
+
+
+
+Step 6. This will be a long loop, practice would be 5 tries
+	If the precints AreaRatio  = to the Expected PopulationRatio ***Do Nothing
+	If the precints AreaRatio != to the Expected population ratio 
+		Find a Vertice(vertice is a lat/long that 2 precints share), if the vertice is connected to a precint that is perfect skip go to next
+		 precint else conpletly skip the precint,
+		
+		if(precint is not perfect move it to increase or decrease the ratio)
+		if( all else fails and all the precint around it are perfect except the chose ratio skip)
+		
+		Repeat for each precint until each precint is perfect or there are few broken precints 
+		
+		
+		
+		
+-- Use this to calculate Distance 
+--Source : https://dzone.com/articles/distance-calculation-using-3
+private double distance(double lat1, double lon1, double lat2, double lon2, char unit) {
+  double theta = lon1 - lon2;
+  double dist = Math.sin(deg2rad(lat1)) * Math.sin(deg2rad(lat2)) + Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.cos(deg2rad(theta));
+  dist = Math.acos(dist);
+  dist = rad2deg(dist);
+  dist = dist * 60 * 1.1515;
+  if (unit == "K") {
+    dist = dist * 1.609344;
+  } else if (unit == "N") {
+  dist = dist * 0.8684;
+    }
+  return (dist);
+}
+/*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
+/*::  This function converts decimal degrees to radians             :*/
+/*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
+private double deg2rad(double deg) {
+  return (deg * Math.PI / 180.0);
+}
+/*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
+/*::  This function converts radians to decimal degrees             :*/
+/*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
+private double rad2deg(double rad) {
+  return (rad * 180.0 / Math.PI);
+}
+system.println(distance(32.9697, -96.80322, 29.46786, -98.53506, "M") + " Miles\n");
+system.println(distance(32.9697, -96.80322, 29.46786, -98.53506, "K") + " Kilometers\n");
+system.println(distance(32.9697, -96.80322, 29.46786, -98.53506, "N") + " Nautical Miles\n");
+
+
+Finding boreders:
+1. to Find the top border
+	Each Latitude has an array of longitutde
+	EX:[100.100],[100,98][100,210],[100,30]--One Array
+	EX:[101,201].[101,98].[101,200]-second array
+	Sort from high to low
+	Array ONE: [100,210],[100,201],[100,98],[100,30]
+	Arrat TWO: [101,201],[101,200],[101,98]
+	Grab the head of each list and sort in order of y value to draw line
+	EX:Draw LINE([101,201],[100.210]) This is the top of your drawing
+	geab tail to get bottom of your outline
+	switch and go bo lat to get left and right
+	Make sure the Lat and long do not match with any other precint's code, if it does it is not a boundary
+	
+	
+Draw border, Use different shades of red and blue instead of a solid black Line
+		
+
+
+

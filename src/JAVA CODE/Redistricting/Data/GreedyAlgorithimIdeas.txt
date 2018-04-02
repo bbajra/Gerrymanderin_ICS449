@@ -1,0 +1,52 @@
+Greedy alogorithim Idea:
+3.24 6:00PM
+Right now we have a precint list that holds 
+	1. Name
+	2. dem voters
+	3. rep voters
+	4. total number of voters
+	5. ArrayList of all the latitude and longitude
+	6. booealn grouped//if this is true the precint has been grouped already
+	7. groupNumber this how we know where the greedy alogirithim is grouped after the
+	   greedy alogirthim runs
+	   
+To Do:
+	1. a field in the object list that shows its place in the arrayList//Finished 3.26 1:10
+	
+	2. create a class that holds the precint name, and its place in the arrayList
+	   This class will be called " PrecintPlaceInArray"//Finished 3.26 1:10
+	   
+	3. Run an algorithim that finds where the precint is in the array and records 
+		it into the object
+		
+	4. create an ArrayList = ArrayList<PrecintPlaceInArray> adjacent Precints 
+		finished 3.26
+	
+	5. From this ArrayList, we will write another algorithim that finds all the ajacenies 
+		of the precint and puts it into the array so each precint will have
+		
+		
+	6. Now from the greedy algorithim we will randomly select a precint from the Precint list
+	   to start from. 
+	   1. This greedy algorithim will look at the list of the adjacent precints and
+	      find the precint that has the lowest number of adjacencies and group it together.
+	      if( we add the precint and the total population is greater then number of voters
+	      per grouop) then we will go the next precint to be eaten and start grouping from there
+	      if( for some reason we run out of precints randomly select precint to start again)
+	      if( we reach 4120 times of randomly trying end)
+	      if( precint does not have anymore precints, randomly select from list of 
+	      adjacent precints that are not yet grouped and start from there )
+	      (if adjacent precint is not in county, dont group)
+	      or
+	      Group all the precint that are adjacent to the starting precint, then change the
+	      starting percint to the precint with the least amount of adjacencies and go from there
+	      
+	      
+	 7. Create another obecjt called groups?
+	 8. Randomly select adjacent precint when there are no more precints to choose from until
+	 
+	 9. So we're gonna randomly select a precint group all the adjacents, then look for
+	 the smallest precint and select that precint to get all adjacent precints,
+	 keep doing this until there are no more adjacent precnts, then randomly select an adjacent 
+	 precint and go from there. Keep doing this until it works
+		

@@ -1,0 +1,48 @@
+What we really wanna do
+Output is what election results would look like if they were grouped differently*********
+
+so group the precints adjacent to each other so if there are 4120 precints 
+divided by cong district(There are 8 congressional district)
+4120/8 = 515 precints in each district. so now based on these precints who would win which district?
+
+
+
+Real Requirments and how to do it?
+
+
+if lat and long overlap they are adjacent
+Get population data into the precints 
+Take the total and divide by # of what we want
+Gather together adjacent precints into districts
+
+The one with the fewer adjacent precints link with the precints with more adjacent pairs
+
+generate random precints to start at to get different maps
+
+3/14/2018
+Step 1. Create a Project that adds the Democrat votes and Republican votes
+& total votes to the geojson
+Step 2. Find the total Population of everything and save it
+Step 3. Turn all the data into precint objects
+Precint object has fields
+Long Lat
+Long Lat String
+population
+Group #
+Array Holding all of the pairs it matches to
+Step 4. Right a greedy algorithim that groups so it look at all the
+precints that its connected to and then does a count of the precint
+to see how many they connect to and then groups the one that has the least amount
+
+update as of 3/18 just need to get Long and Lat into the object
+3.24 5:30
+LongLat is now work, all precints are holding latitude and longitude
+Whats next?
+3.24 5:46
+Modify the GeoJson to add a property called groups: this is where the greedy algoirthim
+puts the output. It will group them together and 
+
+3.27.2018 4:27 pm questions
+Write adjacent groups to geoJson? the data is all the same but it would be hard
+
+if we keep grouping the least it will soon run out and it will have to randomly choose, 
