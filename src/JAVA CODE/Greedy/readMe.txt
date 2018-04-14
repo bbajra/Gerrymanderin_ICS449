@@ -1,0 +1,1 @@
+The grouping algorithim is complete it is now time to just put it all together

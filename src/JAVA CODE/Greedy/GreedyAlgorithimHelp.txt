@@ -1,0 +1,2 @@
+If RandomAdjacent Precint refers to the same precints, look at the group for adjacent precints
+or randomly search for adjacet precint, This is to stop it from using the same precints over and over again
