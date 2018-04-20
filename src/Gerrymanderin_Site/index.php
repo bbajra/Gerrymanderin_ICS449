@@ -53,7 +53,7 @@
 		<div class="col-sm-1"></div>
 	</div></div>
 		<br>
-	<div align="center"><h4><i>Click on the buttons below to view the current election district maps</i></h4></div>
+	<div align="center"><h4><i><b>Click on the buttons below to view the current election district maps<b></i></h4></div>
 	<br>
 	<div align="center">
 	<a target="_blank" href="usCongress.html" class="btn btn-default"> Current U.S. Congress</a>
@@ -64,7 +64,7 @@
 	<br>
 	<br>
 	<br>
-	<div align="center"><h4><i>Click on the buttons below to view the redrawn district maps optimizing compactness </i></h4></div>
+	<div align="center"><h4><i><b>Click on the buttons below to view the redrawn district maps optimizing compactness<b></i></h4></div>
 	<br>
 	<div align="center">
 	<a target="_blank" href="usCongressGroup.html" class="btn btn-default">Redrawn U.S. Congress </a>
