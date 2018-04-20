@@ -24,35 +24,53 @@
 	</title>
 	<body style="background-color:#ffffff;">
 	<nav class="navbar navbar-inverse">
-	<div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>                        
-      </button>
-      <a class="navbar-brand" href="#">MN 2016 Election Results</a>
-    </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
-		<ul class="nav navbar-nav">
-		  <li><a href="#">Recommendation</a></li>
-		</ul>
-		<form action="http://www.google.com/search" class="navbar-form navbar-left" method="get" name="searchform" target="_blank">
-			<input class="form-controls search" name="search" placeholder="Search in google" type="text">
-			<button class="btn btn-default" type="submit">
-			<i class="glyphicon glyphicon-search"></i>Search</button>
-		</form>
-	  </div>
+		<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>                        
+				</button>
+				<a class="navbar-brand" href="#">MN 2016 Election Results</a>
+			</div>
+			<div class="collapse navbar-collapse" id="myNavbar">
+				<form action="http://www.google.com/search" class="navbar-form navbar-left" method="get" name="searchform" target="_blank">
+					<input class="form-controls search" name="search" placeholder="Search in google" type="text">
+					<button class="btn btn-default" type="submit">
+					<i class="glyphicon glyphicon-search"></i>Search</button>
+				</form>
+			</div>
 	</nav>
 	<div class="jumbotron text-center"  style="background-color:#f0f0f0;">
 	  <h1>Gerrymandering Project</h1>
 	</div>
-	<div align="center">Click on the buttons below to view the election results</div>
+	<div class="container">
+	  <div class="row">
+		<div class="col-sm-1"></div>
+		<div class="col-sm-10" align="center"><p><h4>Gerrymander is a changing of voting districts to give one party an advantage or disadvantage a group. This project presents two maps, 
+		one with the current election district from 2016 and another with the redrawn district using algorithm to optimize compactness. 
+		The goal here is to compare the current and redrawn distircts and evaluate if there is any possibility of gerrymandering.
+		</h4></p></div>
+		<div class="col-sm-1"></div>
+	</div></div>
+		<br>
+	<div align="center"><h4><i>Click on the buttons below to view the current election district maps</i></h4></div>
 	<br>
 	<div align="center">
-	<a target="_blank" href="usCongress.html" class="btn btn-default"> U.S. Congress </a>
-	<a target="_blank" href="presidential.html" class="btn btn-default">Presidential</a>
-	<a target="_blank" href="mnSenate.html" class="btn btn-default">MN Senate</a>
-	<a target="_blank" href="mnHouse.html" class="btn btn-default"> MN House </a>
+	<a target="_blank" href="usCongress.html" class="btn btn-default"> Current U.S. Congress</a>
+	<a target="_blank" href="presidential.html" class="btn btn-default">Current Presidential</a>
+	<a target="_blank" href="mnSenate.html" class="btn btn-default">Current MN Senate</a>
+	<a target="_blank" href="mnHouse.html" class="btn btn-default">Current MN House</a>
+	</div>
+	<br>
+	<br>
+	<br>
+	<div align="center"><h4><i>Click on the buttons below to view the redrawn district maps optimizing compactness </i></h4></div>
+	<br>
+	<div align="center">
+	<a target="_blank" href="usCongressGroup.html" class="btn btn-default">Redrawn U.S. Congress </a>
+	<a target="_blank" href="presidentialGroup.html" class="btn btn-default">Redrawn Presidential</a>
+	<a target="_blank" href="mnSenateGroup.html" class="btn btn-default">Redrawn MN Senate</a>
+	<a target="_blank" href="mnHouseGroup.html" class="btn btn-default">Redrawn MN House </a>
 	</div>
 	
 	<div class="container">
@@ -178,15 +196,15 @@
 	  <div class="row">
 		<div class="col-sm-4">
 		  <h3>About</h3>
-		  <p>This project analyses the precinct data from Minnesota state.</p>
+		  <p>Gerrymandering project analyzes the precinct data from Minnesota state and compares the current election district and redrawn districts. This evaluates if there is any possibility of gerrymandering.</p>
 		</div>
 		<div class="col-sm-4">
 		  <h3>Interactive Map</h3>
-		  <p>The use of interactive map helps to visualize the data in a convenient way.</p>
+		  <p>The use of interactive map helps to visualize the data in a convenient way. There are two maps, current map and redrawn map for each district.</p>
 		</div>
 		<div class="col-sm-4">
 		  <h3>Districts</h3>        
-		  <p>Election results for each districts can be viewed by clicking on the respective buttons.</p>
+		  <p>Election results for each districts can be viewed by clicking on the respective buttons. Current result show the election result from 2016 and redrawn district map optimizes compactness. </p>
 		</div>
 	  </div>
 	</div>
