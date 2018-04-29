@@ -1,17 +1,51 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Main123 {
 
 	public static ArrayList<Precints> precintlist;
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		
+		
+		Scanner scan = new Scanner(System.in);
+		//System.out.println("Enter Number Of Groups: " );
+		//int numOfGroups = scan.nextInt();
+		/**
+		 * 
+		 * US Congress = 8 GroupedPrecintsCongressionalWithGroups
+		 * MN Senate = 67 GroupedPrecintMnHouseSenate
+		 * MN House = 134 GroupedPrecintMNHouse
+		 * Presidental = 87 GroupedPrecintPresidental
+		 * add comment geojson Wood Lake Twp
+		 */
+		int numOfGroups = 8;
+		String fileName  ="GroupedPrecintsCongerssionalWithGroups.GEOJSON";
+		//String fileName  ="GroupedPrecintsMNHouse.GEOJSON";
+		//String fileName  ="GroupedPrecintsMNSenate.GEOJSON";
+		//String fileName  ="GroupedPrecintsPresidental.GEOJSON";
 		Parser parseFile = new Parser();
 		ArrayList<String> fileAsString = parseFile.getStringHolder();//This reads the file into a string
 		PrecintCreator precintCreator = new PrecintCreator(fileAsString);//this creats the precints from the file
-		int numOfGroups = 8;
+		
 		GreedyGrouping greedy = new GreedyGrouping(precintCreator.getPrecintList(),numOfGroups, precintCreator.getTotalNumberOfVotes());
 		ArrayList<Precints> precintListWithGroups = greedy.precintList;
 		ArrayList<Group> groupList = greedy.getGroupedPrecints();
+		ArrayList order = greedy.getOrder();
+		WriteToNewFile wtnf = new WriteToNewFile(fileAsString, groupList, fileName,order); 
+		int expectedCount = greedy.totalNumberOfVotes;
+		int observedCount = 0;
+		for(int i = 0;i<groupList.size();i++){
+			Group group = groupList.get(i);
+			System.out.println("Group: " + group.getGroupNumber() + " Winning party is: " + group.getWinningParty() + " Rep Votes: " + group.getRepAmount() + " Dem Votes: " + group.getDemAmount() + " Total Votes " + group.getPopulationAmount());
+			observedCount = observedCount + group.getPopulationAmount();
+		}
+		System.out.println("Expected Count: " + expectedCount + " Observed Count : " + observedCount);
+		
+		
+		
+		//uncomment bottom part to see results
+		/*
 		for(int i = 0;i<groupList.size();i++){
 			System.out.println("Group: " + i);
 			Group group = groupList.get(i);
@@ -19,7 +53,7 @@ public class Main123 {
 				group.getGroupedPrecintList().get(j).printAll();
 			}
 		}
-		 
+		 */
 		/*
 		precintlist = precintCreator.getPrecintList();
 		Precints precint123 = precintlist.get(20);

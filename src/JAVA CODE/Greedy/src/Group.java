@@ -7,6 +7,9 @@ public class Group {
 	private int groupNumber;
 	private int populationAmount = 0;
 	public ArrayList<Precints> groupedPrecintList = new ArrayList<Precints>();
+	private int demAmount;
+	private int repAmount;
+	private String winningParty;
 	
 	public Group(int groupNumber){
 		this.groupNumber = groupNumber;
@@ -47,5 +50,40 @@ public class Group {
 		Random rand = new Random(); 
 		int value = rand.nextInt(groupedPrecintList.size()); 
 		return value;
+	}
+	
+	public void findWinners(){
+		setAmounts();
+		setWinner();
+	}
+	
+	private void setAmounts(){
+		for(int i = 0;i<groupedPrecintList.size();i++){
+			Precints precint = groupedPrecintList.get(i);
+			int demVotes = Integer.parseInt(precint.getDemVotes());
+			int repVotes = Integer.parseInt(precint.getRepVotes());
+			demAmount = demAmount + demVotes;
+			repAmount = repAmount + repVotes;
+		}
+		
+	}
+	private void setWinner(){
+		if(demAmount>repAmount){
+			winningParty = "Democrat";
+		}else if(repAmount>demAmount){
+			winningParty = "Republican";
+		}
+	}
+
+	public int getDemAmount() {
+		return demAmount;
+	}
+
+	public int getRepAmount() {
+		return repAmount;
+	}
+
+	public String getWinningParty() {
+		return winningParty;
 	}
 }

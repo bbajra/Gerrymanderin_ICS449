@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 public class Parser {
 	private ArrayList<String> StringHolder = new ArrayList<String>();
-	String FileLocation = "C:/Projects/ICS499/Redistricting/Data/GeoJsonWithAdjacentPrecints.txt";
+	String FileLocation = "C:/Projects/ICS499/Greedy/Data/GeoJsonWithAdjacentPrecints.txt";
 	
 	//String FileLocation = "C:/Projects/ICS499/Redistricting/Data/TestData.txt";
 	public Parser(){

@@ -7,10 +7,38 @@ public class WriteToGeoJson {
 
 	public ArrayList<Precints> precintList;
 	public ArrayList<Group> groupList;
-	public WriteToGeoJson(ArrayList<Precints> precintList,ArrayList<Group> groupList){
+	public ArrayList<String> orgList;
+	public WriteToGeoJson(ArrayList<Precints> precintList,ArrayList<Group> groupList,ArrayList<String> orgString){
 		this.precintList = precintList;
 		this.groupList = groupList;
-		writeOutToFile();
+		this.orgList = orgString;
+		//writeOutToFile();
+		writeNewGeoJsonCode();
+	}
+	
+	
+	public void writeNewGeoJsonCode(){
+		File file = new File("C:/Projects/ICS499/Redistricting/Data/GeoJsonWithAdjacentPrecints.txt");
+		try {
+			PrintWriter pw = new PrintWriter(file);
+			System.out.println("Writting out groups");
+			for(int i = 0;i<10;i++){
+				String orgString = orgList.get(i);
+					pw.println(orgString);
+			}
+			for(int j = 0;j<precintList.size();j++){
+				String precint = precintList.get(j).getGeoJsonCode();
+				pw.println(precint);
+			}
+			pw.println("]");
+			pw.println("}");
+			pw.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			System.out.println("Something failed when writting");
+			e.printStackTrace();
+		}
+		
 	}
 	
 	

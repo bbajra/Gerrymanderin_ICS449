@@ -6,6 +6,8 @@ public class WriteToGeoJson {
 	private ArrayList<String> newArrayList = new ArrayList<String>();
 	private String typeOfVote;
 	
+	
+	
 	public WriteToGeoJson(DataBaseConnection conn, ArrayList<String> org, String typeOfvote){
 		this.conn = conn;
 		this.originalArrayListOfString = org;

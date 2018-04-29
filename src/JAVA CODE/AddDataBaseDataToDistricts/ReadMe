@@ -1,5 +1,1 @@
-This Project connects to the database and adds the Voter Numers into the GEOJSON
-
-Change to precint ID
-
-Had to change from searching by precint name to searching by precint ID
+This Project Reads the Voters from the DataBase and throws it into the GEOJSON

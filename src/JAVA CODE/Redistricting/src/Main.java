@@ -20,16 +20,19 @@ public class Main{
 		
 		
 		
-		
-		GreedyAlogrithim greedy = new GreedyAlogrithim(precintList, 12, createPrecint.getTotalNumberOfVotes());
+		GreedyAlogrithim greedy = new GreedyAlogrithim(precintList, 12, createPrecint.getTotalNumberOfVotes());//This also gets the adjacent precints
 		ArrayList<Group> greedyGroups = greedy.getGroupedPrecints();
+		
 		ArrayList<Precints> precintListDone = greedy.getPrecintList();
-		WriteToGeoJson wgj = new WriteToGeoJson(precintListDone, greedyGroups);
+		WriteToGeoJson wgj = new WriteToGeoJson(precintListDone, greedyGroups,readFile);
+		
 		System.out.println("begging to print groups");
+		/*
 		for(int i = 0;i<greedyGroups.size();i++){
 			Group group = greedyGroups.get(i);
 			System.out.println("Printing group: " + i );
 			ArrayList<Precints> groupPrecintList = group.getGroupedPrecintList();
+		
 			/*
 			for(int j = 0;j<100;j++){
 				Precints precint = groupPrecintList.get(j);
@@ -37,9 +40,9 @@ public class Main{
 				
 			}
 			System.out.println();*/
-		}
+		//}
 		
-		System.out.println("Finnished printing groups");
+		//System.out.println("Finnished printing groups");
 		
 		final long endTime = System.currentTimeMillis()- startTime;
 		long minutes = TimeUnit.MILLISECONDS.toMinutes(endTime);
