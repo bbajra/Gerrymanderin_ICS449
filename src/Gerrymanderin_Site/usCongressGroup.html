@@ -118,7 +118,7 @@
 
 		mapLayerInformation.update = function (props) {
 			this._div.innerHTML = '<h4>Election Results: U.S. Congress</h4>' +  (props ?
-				'<b>' + 'District:' + props.group + '</b><br />' + 'County: ' + props.County + '</b><br/>' + 'Winning Party: ' + props.party
+				'<b>' + 'County: ' + props.County + '</b><br/>' + 'Winning Party: ' + props.party
 				+ '</b><br/>' + 'Total Precinct Voters: ' + props.TotalNumberOfVoters 
 				: 'Hover over an area');
 		};
@@ -236,7 +236,7 @@
 			}).addTo(map);
 
 		var basemaps = {
-            "District map": colorLayer,
+            //"District map": colorLayer,
 			"Gerrymandering map": gerrymanderingLayer
 			
 		};
