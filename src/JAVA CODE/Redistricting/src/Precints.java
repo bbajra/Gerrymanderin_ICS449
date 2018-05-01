@@ -12,8 +12,13 @@ public class Precints {
 	private int groupNumber;//This is Which groups its in
 	private int placeInIndex;//This is where the object is inside the Array
 	public ArrayList<Precints> adjacentList = new ArrayList<Precints>();
+	private ArrayList<String> adjacentListAsString = new ArrayList<String>();//This holds the adjacent precint name, used a refernce to find the acutal precints
 	
 	
+	public ArrayList<String> getAdjacentListAsString() {
+		return adjacentListAsString;
+	}
+
 	public ArrayList<String> getLongLatList() {
 		return LongLatList;
 	}
@@ -77,7 +82,72 @@ public class Precints {
 			System.out.println("Precint: [" + i + "] : " + name);
 		}
 	}
-
-
+	/**
+	 * adds adjacent precints into the geoJson code
+	 */
+	public void addAdjacentPrecintsToString(){
+		
+		String orgString = geoJsonCode;
+		char[] org = orgString.toCharArray();
+		char[] precintsToInsertToProperty = turnAdjacentPrecintsIntoString().toCharArray();
+		char[] finalStringArray = new char[org.length+precintsToInsertToProperty.length];
+		int indexOfMove = findInsertIndex(org, "AdjacentPrecints");
+		System.arraycopy(org, 0, finalStringArray, 0, indexOfMove);
+		String x = new String(finalStringArray);
+		System.out.println(x);
+		System.arraycopy(precintsToInsertToProperty, 0, finalStringArray, indexOfMove,precintsToInsertToProperty.length-1);//copys values to be inserted
+		String y = new String(finalStringArray);
+		System.out.println(y);
+		System.arraycopy(org, indexOfMove, finalStringArray, indexOfMove+precintsToInsertToProperty.length-1, org.length-indexOfMove);
+		String z = new String(finalStringArray);
+		System.out.println(z);
+		String finalString = new String(finalStringArray);
+		this.geoJsonCode = finalString;
+	}
+	/**
+	 * turns precints names into a String of precints name
+	 * When copying the array List make sure to not copy the last part
+	 * @return
+	 */
+	private String turnAdjacentPrecintsIntoString(){
+		String adjacentPrecintsAsString = "";
+		for(int i = 0;i<adjacentList.size();i++){
+			Precints precint = adjacentList.get(i);
+			String precintName = precint.getPrecintName();
+			adjacentPrecintsAsString = adjacentPrecintsAsString + precintName + ",";
+		}
+		return adjacentPrecintsAsString;
+	}
+	
+	/**
+	 * Finds the index where the votes should be inserted
+	 * @param org
+	 * @param type
+	 * @return
+	 */
+	private int findInsertIndex(char[] org, String type){
+		String newType = type + "\":\"";
+		int length = newType.length() ;
+		int indexOfEndOfType = 0;
+		int j;
+		int k;
+		String match = "";
+		for(int i = 43;i<org.length;i++){// i = 43 because the first 44 characters are all the same //THe legtnh has to be23
+			j = i;
+			for(k=j+length;j<k;j++){
+				match = match + org[j];
+			}
+			if(match.equals(newType)){
+				indexOfEndOfType = j;
+				return indexOfEndOfType;
+			}else{
+				match = "";
+			}
+		}
+		return indexOfEndOfType;
+	}
+	public void AddToAdjacentListAsString(String precintNameAsString){
+		adjacentListAsString.add(precintNameAsString);
+	}
 	
 }

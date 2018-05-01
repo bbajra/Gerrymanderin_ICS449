@@ -1,1 +1,1 @@
-The grouping algorithim is complete it is now time to just put it all together
+This Project Takes a GeoJson Code and groupes the precints based on population.

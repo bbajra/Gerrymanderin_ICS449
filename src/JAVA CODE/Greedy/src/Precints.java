@@ -11,6 +11,7 @@ public class Precints {
 	private String totVotes;//Number of total voters
 	private ArrayList<String> LongLatList = new ArrayList<String>();//This holds the latitude and longtiude ex:[-93.1914,46.7668]
 	private boolean grouped = false;//if the precint is not grouped yet set it as null
+
 	private int groupNumber;//This is Which groups its in
 	private int placeInIndex;//This is where the object is inside the Array
 	public ArrayList<Precints> adjacentList = new ArrayList<Precints>();
@@ -96,13 +97,13 @@ public class Precints {
 		int indexOfMove = findInsertIndex(org, "AdjacentPrecints");
 		System.arraycopy(org, 0, finalStringArray, 0, indexOfMove);
 		String x = new String(finalStringArray);
-		System.out.println(x);
+		//System.out.println(x);
 		System.arraycopy(precintsToInsertToProperty, 0, finalStringArray, indexOfMove,precintsToInsertToProperty.length-1);//copys values to be inserted
 		String y = new String(finalStringArray);
-		System.out.println(y);
+		//System.out.println(y);
 		System.arraycopy(org, indexOfMove, finalStringArray, indexOfMove+precintsToInsertToProperty.length-1, org.length-indexOfMove);
 		String z = new String(finalStringArray);
-		System.out.println(z);
+		//System.out.println(z);
 		String finalString = new String(finalStringArray);
 		this.geoJsonCode = finalString;
 	}
@@ -155,5 +156,13 @@ public class Precints {
 	public void printNameAndGroups(){
 		System.out.println(precintName + ": Group: " + groupNumber);
 	}
+	public void setGeoJsonCode(String geoJsonCode) {
+		this.geoJsonCode = geoJsonCode;
+	}
+
+	public void setPrecintName(String precintName) {
+		this.precintName = precintName;
+	}
+
 }
 

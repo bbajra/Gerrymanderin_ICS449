@@ -17,10 +17,19 @@ public class GreedyAlogrithim {
 		findNumberOfVotersPerGroup();
 		getMyIndexInMap();
 		adjacentCreator();
-		getGreedy();
+		//getGreedy();
+		addAdjacentToGeoJsonCode();
+		
+		
 
 	}
 
+	public void addAdjacentToGeoJsonCode(){
+		for(int i = 0;i<precintList.size();i++){
+			Precints precint = precintList.get(i);
+			precint.addAdjacentPrecintsToString();
+		}
+	}
 
 	/**
 	 * this is the greedy algorithim that will group the precints based on population
